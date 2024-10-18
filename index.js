@@ -15,6 +15,8 @@ const fetchCarData = async () => {
     //initially display all the cars when the page load
     displayCars(allCars)
 
+    generateFilterButtons(allCars)
+
     //Handle any error that occurs during refresh process
     }catch(error){
 
@@ -25,7 +27,7 @@ const fetchCarData = async () => {
 
 //Define a function to display the car cards on the webpage
 const displayCars = (cars) => {
-    const carCard = document.getElementById('carContainer')
+    const carContainer = document.getElementById('carContainer')
 
     // CLEAR ANY EXISTIN CONTENT INSIDE THE CAR CONTAINER
     carContainer.innerHTML = '';
@@ -51,6 +53,34 @@ const displayCars = (cars) => {
          carContainer.appendChild(carCard)
         
     })
+}
+
+//Define a function to dynamically create filter buttons
+const generateFilterButtons = (cars) => {
+    //get the HTML where the filter buttons will be placed
+    const filterButtonsContainer = document.getElementById('filterButtons')
+
+    //use map() to create an array of all car names
+    const uniqueNames = [...new Set(cars.map((car) => car.name))];
+    //use set to remove duplicate and filter buttons will be placed.
+
+    //loop through the array of unique car names
+    uniqueNames.forEach((name) => {
+        //create a new "<button>" element for each unique car name
+        const button = document.createElement('button')
+        //set the text of the button to car name
+        button.textContent = name
+
+        button.addEventListener('click', () => filterCarsByName(name))
+
+        filterButtonsContainer.appendChild(button)
+    })
+}
+
+const filterCarsByName = (name) => {
+    const filteredCars = allCars.filter((car) => car.name === name)
+
+    displayCars(filteredCars)
 }
 
 window.onload = fetchCarData
