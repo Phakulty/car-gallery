@@ -53,6 +53,11 @@ const displayCars = (cars) => {
         <h2>${car.name}</h2>
         <p>Model: ${car.model}</p>
          `
+        // add click event to store car data in localStorage and navigate to the details page 
+        carCard.addEventListener('click', () => {
+            localStorage.setItem('selectedCar', JSON.stringify(car));
+            window.location.href = 'car-details.html'
+        })
 
          //append the car card to the car container on the webpage
          carContainer.appendChild(carCard)
