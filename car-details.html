@@ -11,12 +11,17 @@
     <h1>Car Details</h1>
     <div class="container">
         <div class="details-container">
-            <div class="card-details" id="carDetails"></div>
+            <div class="car-details" id="carDetails"></div>
             <button class="back-button">Back to Gallery</button>
 
         </div>
     </div>
 
     <script src="car-details.js"></script>
+    <script>
+        if(!localStorage.getItem('authenticatedUser')){
+            window.location.href = 'login.html'
+        }
+    </script>
 </body>
 </html>
